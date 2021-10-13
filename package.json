@@ -1,0 +1,25 @@
+{
+  "name": "chat-application",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon app.js -e js,ejs",
+    "start": "node app.js"
+  },
+  "description": "A realtime chat application using Node",
+  "main": "app.js",
+  "author": "Ratul-devR",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.10",
+    "socket.io": "^4.2.0",
+    "validator": "^13.6.0"
+  }
+}
