@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["middlewares"]
+  "prettier.printWidth": 110,
+  "cSpell.words": ["middlewares", "originalname", "signup", "Swal", "Toastify", "toastr"]
 }

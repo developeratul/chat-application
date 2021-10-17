@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %></title>
-    <style>
-      span {
-        color: red;
-      }
-    </style>
+    <%- include("./partials/head.ejs") %>
   </head>
-
   <body>
-    <h1>Error Status: <span><%= error.status %></span></h1>
-    <p><%= error.message %></p>
+    <main>
+      <%- include("./partials/nav.ejs") %>
+      <div class="content">
+        <div class="error_page_content_container">
+          <div class="error_page_content">
+            <div class="error_image">
+              <img src="./assets/not-found.svg" alt="Illustration" />
+            </div>
+            <div class="error_message_and_status">
+              <h2><%= error.status %></h2>
+              <p><%= error.message %></p>
+              <p><%= error.stack %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

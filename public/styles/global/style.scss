@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap");
+
+@import "../var";
 
 * {
   margin: 0;
@@ -7,4 +11,143 @@
   font-family: Rubik;
   outline: none;
   text-decoration: none;
+}
+
+body {
+  background: $background;
+  color: $textColor;
+  height: 100vh;
+  overflow: hidden;
+}
+
+button {
+  cursor: pointer;
+}
+
+main {
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  height: 100%;
+}
+
+// nav bar
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 5px 0;
+  background: $backgroundSecondary;
+  overflow: hidden;
+  .nav_title {
+    color: $themeColor;
+    font-family: Jetbrains Mono;
+  }
+  .nav_links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    li {
+      list-style: none;
+      margin-right: 20px;
+      &:last-child {
+        margin-right: none;
+      }
+      a {
+        color: $textColor;
+        transition: 0.5s;
+        letter-spacing: 0.5px;
+        &:hover {
+          color: $themeSecondary;
+        }
+      }
+    }
+  }
+}
+
+// sign in page content
+.sign_in_page_content_container {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  .sign_in_form {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    border-radius: 5px;
+    background: $backgroundSecondary;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.419);
+    h2.sign_in_form_header {
+      text-align: center;
+      margin-bottom: 20px;
+      color: $themeSecondary;
+      font-family: Noto Sans Mono;
+    }
+    form.fields_container {
+      width: 100%;
+      .single_field {
+        width: 100%;
+        margin-bottom: 10px;
+        input,
+        button {
+          width: 100%;
+          padding: 10px;
+          border-radius: 3px;
+          border: none;
+        }
+        input {
+          border: 2px solid #fff;
+          &:focus {
+            border-color: $themeSecondary;
+          }
+        }
+        button {
+          background: $themeSecondary;
+          color: #fff;
+          transition: 0.5s;
+          &:hover {
+            background: hsl(160, 62%, 50%);
+          }
+          &:active {
+            transform: scale(0.95);
+          }
+        }
+      }
+    }
+    .form_footer {
+      text-align: center;
+      a {
+        color: $themeColor;
+      }
+    }
+  }
+}
+
+// error page
+.error_page_content_container {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  .error_page_content {
+    width: 100%;
+    max-width: 300px;
+    .error_image {
+      width: 100%;
+      margin-bottom: 20px;
+      img {
+        width: 100%;
+      }
+    }
+    .error_message_and_status {
+      text-align: center;
+      h2 {
+        color: $themeColor;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+.content {
+  overflow-x: hidden;
 }

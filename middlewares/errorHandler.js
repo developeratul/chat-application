@@ -7,7 +7,7 @@ module.exports = {
 
     res.status(err.status || 500);
 
-    if (!res.locals.html) {
+    if (res.locals.html) {
       res.render("error", {
         title: err.message,
       });

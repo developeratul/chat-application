@@ -4,6 +4,28 @@
     <%- include("./partials/head.ejs") %>
   </head>
   <body>
-    <%= title %>
+    <main>
+      <%- include("./partials/nav.ejs") %>
+      <div class="content">
+        <div class="sign_in_page_content_container">
+          <div class="sign_in_form">
+            <h2 class="sign_in_form_header">Sign In</h2>
+            <form class="fields_container" method="post">
+              <div class="single_field">
+                <input autofocus required type="email" placeholder="Enter your email" />
+              </div>
+              <div class="single_field">
+                <input required type="password" placeholder="Enter your password" />
+              </div>
+              <div class="single_field">
+                <button type="submit">Sign in</button>
+              </div>
+            </form>
+
+            <p class="form_footer">Don't have any account? <a href="/signup">Register</a></p>
+          </div>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
