@@ -39,7 +39,7 @@ async function sendRequestToServer(e) {
     Swal.fire({ position: "center", icon: "success", title: message, showConfirmButton: false, timer: 1500 });
     document.querySelectorAll("p.error").forEach((p) => (p.style.display = "none"));
     setTimeout(() => {
-      // redirect the user to the other page
+      window.location.replace("/inbox");
     }, 1500);
   }
 }

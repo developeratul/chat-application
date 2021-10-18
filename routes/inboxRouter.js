@@ -4,12 +4,11 @@ const express = require("express");
 const decorateHtmlResponse = require("../middlewares/decorateHtmlResponse");
 const { checkLogin } = require("../middlewares/checkLogin");
 
-const { getUsers, deleteUser } = require("../controllers/usersController");
+// controllers
+const { getInbox } = require("../controllers/inboxController");
 
 const router = express.Router();
 
-router.get("/", decorateHtmlResponse("Users"), checkLogin, getUsers);
-
-router.delete("/:id", checkLogin, deleteUser);
+router.get("/", decorateHtmlResponse("Inbox"), checkLogin, getInbox);
 
 module.exports = router;

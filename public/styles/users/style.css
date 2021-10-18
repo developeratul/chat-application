@@ -21,7 +21,7 @@
 
 .users_page_content_container .users_table table {
   width: 100%;
-  background: #1f2430;
+  background: #1a1f29;
 }
 
 .users_page_content_container .users_table table thead tr th {
@@ -29,10 +29,12 @@
   padding: 10px;
   font-weight: 300;
   color: #95e6cb;
+  text-align: center;
 }
 
 .users_page_content_container .users_table table tbody tr td {
   padding: 10px;
+  text-align: center;
 }
 
 .users_page_content_container .users_table table tbody tr .name {

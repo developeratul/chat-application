@@ -13,6 +13,7 @@ const { notFoundHandler, errorHandler } = require("./middlewares/errorHandler");
 const loginRouter = require("./routes/loginRouter");
 const signupRouter = require("./routes/signupRouter");
 const usersRouter = require("./routes/usersRouter");
+const inboxRouter = require("./routes/inboxRouter");
 
 const app = express();
 dotenv.config();
@@ -41,6 +42,8 @@ app.use("/", loginRouter);
 app.use("/signup", signupRouter);
 // for rendering the signup page and handling the users related stuffs
 app.use("/users", usersRouter);
+// for rendering the inbox page and handling the inbox related stuffs
+app.use("/inbox", inboxRouter);
 
 // * error handlings
 app.use(notFoundHandler);
