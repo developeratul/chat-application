@@ -11,6 +11,19 @@
   text-decoration: none;
 }
 
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b8cfe680;
+  border-radius: 100px;
+}
+
 body {
   background: #242936;
   color: #cccac2;
@@ -44,6 +57,7 @@ nav {
   padding: 5px 0;
   background: #1a1f29;
   overflow: hidden;
+  border-bottom: 1px solid #242936;
 }
 
 nav .nav_title {
@@ -134,9 +148,13 @@ nav .nav_links li a:hover {
 
 .sign_in_page_content_container .sign_in_form form.fields_container .single_field button {
   background: #95e6cb;
+  border: none;
   color: #fff;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
 }
 
 .sign_in_page_content_container .sign_in_form form.fields_container .single_field button:hover {
@@ -146,6 +164,12 @@ nav .nav_links li a:hover {
 .sign_in_page_content_container .sign_in_form form.fields_container .single_field button:active {
   -webkit-transform: scale(0.95);
           transform: scale(0.95);
+}
+
+.sign_in_page_content_container .sign_in_form form.fields_container .single_field .error {
+  font-size: 0.8rem;
+  color: #f07178;
+  margin-top: 5px;
 }
 
 .sign_in_page_content_container .sign_in_form .form_footer {
@@ -188,5 +212,11 @@ nav .nav_links li a:hover {
 
 .content {
   overflow-x: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  * {
+    cursor: default !important;
+  }
 }
 /*# sourceMappingURL=style.css.map */

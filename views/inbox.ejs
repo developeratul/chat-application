@@ -2,12 +2,186 @@
 <html lang="en">
   <head>
     <%- include("./partials/head.ejs") %>
+    <link rel="stylesheet" href="./styles/inbox/style.css" />
+    <script src="./js/inbox.js" defer></script>
+    <script src="https://kit.fontawesome.com/585143586a.js" crossorigin="anonymous"></script>
   </head>
   <body>
+    <%- include("./partials/newChat.ejs") %>
     <main>
       <%- include("./partials/nav.ejs") %>
       <div class="content">
-        <h1><%= title %></h1>
+        <div class="inbox_content_container">
+          <div class="toggle_side_bar_button">
+            <button><i class="fas fa-chevron-right"></i></button>
+          </div>
+
+          <div class="sideBar">
+            <div class="closeSideBarButton">
+              <button><i class="fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="searchBar">
+              <input type="search" placeholder="Search Users" />
+            </div>
+
+            <div class="conversationsList">
+              <a href="#" class="single_conversation">
+                <div class="conversation_image">
+                  <img src="./assets/nophoto.png" alt="Username" />
+                </div>
+                <div class="conversation_details">
+                  <p class="username">Muhammad Ratul</p>
+                  <p class="lastSent">1 minute ago</p>
+                </div>
+              </a>
+              <a href="#" class="single_conversation">
+                <div class="conversation_image">
+                  <img src="./assets/nophoto.png" alt="Username" />
+                </div>
+                <div class="conversation_details">
+                  <p class="username">Muhammad Ratul</p>
+                  <p class="lastSent">1 minute ago</p>
+                </div>
+              </a>
+              <a href="#" class="single_conversation">
+                <div class="conversation_image">
+                  <img src="./assets/nophoto.png" alt="Username" />
+                </div>
+                <div class="conversation_details">
+                  <p class="username">Muhammad Ratul</p>
+                  <p class="lastSent">1 minute ago</p>
+                </div>
+              </a>
+              <a href="#" class="single_conversation">
+                <div class="conversation_image">
+                  <img src="./assets/nophoto.png" alt="Username" />
+                </div>
+                <div class="conversation_details">
+                  <p class="username">Muhammad Ratul</p>
+                  <p class="lastSent">1 minute ago</p>
+                </div>
+              </a>
+              <a href="#" class="single_conversation">
+                <div class="conversation_image">
+                  <img src="./assets/nophoto.png" alt="Username" />
+                </div>
+                <div class="conversation_details">
+                  <p class="username">Muhammad Ratul</p>
+                  <p class="lastSent">1 minute ago</p>
+                </div>
+              </a>
+              <a href="#" class="single_conversation">
+                <div class="conversation_image">
+                  <img src="./assets/nophoto.png" alt="Username" />
+                </div>
+                <div class="conversation_details">
+                  <p class="username">Muhammad Ratul</p>
+                  <p class="lastSent">1 minute ago</p>
+                </div>
+              </a>
+              <a href="#" class="single_conversation">
+                <div class="conversation_image">
+                  <img src="./assets/nophoto.png" alt="Username" />
+                </div>
+                <div class="conversation_details">
+                  <p class="username">Muhammad Ratul</p>
+                  <p class="lastSent">1 minute ago</p>
+                </div>
+              </a>
+              <a href="#" class="single_conversation">
+                <div class="conversation_image">
+                  <img src="./assets/nophoto.png" alt="Username" />
+                </div>
+                <div class="conversation_details">
+                  <p class="username">Muhammad Ratul</p>
+                  <p class="lastSent">1 minute ago</p>
+                </div>
+              </a>
+              <a href="#" class="single_conversation">
+                <div class="conversation_image">
+                  <img src="./assets/nophoto.png" alt="Username" />
+                </div>
+                <div class="conversation_details">
+                  <p class="username">Muhammad Ratul</p>
+                  <p class="lastSent">1 minute ago</p>
+                </div>
+              </a>
+              <a href="#" class="single_conversation">
+                <div class="conversation_image">
+                  <img src="./assets/nophoto.png" alt="Username" />
+                </div>
+                <div class="conversation_details">
+                  <p class="username">Muhammad Ratul</p>
+                  <p class="lastSent">1 minute ago</p>
+                </div>
+              </a>
+              <a href="#" class="single_conversation">
+                <div class="conversation_image">
+                  <img src="./assets/nophoto.png" alt="Username" />
+                </div>
+                <div class="conversation_details">
+                  <p class="username">Muhammad Ratul</p>
+                  <p class="lastSent">1 minute ago</p>
+                </div>
+              </a>
+            </div>
+
+            <div class="addNewConversation">
+              <button>Start new chat</button>
+            </div>
+          </div>
+
+          <div class="conversation">
+            <div class="topBar">
+              <div class="user_avatar_and_name">
+                <div class="userAvatar"><img src="./assets/nophoto.png" alt="User name" /></div>
+                <h3 class="username">Username</h3>
+              </div>
+              <div class="delete_button">
+                <button><i class="far fa-trash-alt"></i></button>
+              </div>
+            </div>
+
+            <div class="messages">
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is a message</h1>
+              <h1>This is the last one</h1>
+            </div>
+
+            <div class="sendMessage">
+              <div class="sendImageButton">
+                <button><i class="far fa-images"></i></button>
+              </div>
+              <div class="messageInput"><input type="text" placeholder="Enter your message" /></div>
+              <div class="sendButton">
+                <button><i class="far fa-paper-plane"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </body>

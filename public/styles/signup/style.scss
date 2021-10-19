@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap");
 
 @import "../var";
+@import "../mixin";
 
 .sign_up_page_content_container {
   height: 100%;
@@ -40,17 +41,8 @@
         }
         button,
         span {
-          background: $themeSecondary;
-          color: #fff;
-          transition: 0.5s;
-          text-align: center;
+          @include buttonStyle($themeSecondary, 10px, $themeSecondaryHover);
           font-size: 0.9rem;
-          &:hover {
-            background: hsl(160, 62%, 50%);
-          }
-          &:active {
-            transform: scale(0.95);
-          }
         }
         .submit_button:disabled {
           cursor: not-allowed;
@@ -60,7 +52,7 @@
           cursor: pointer;
           background: $themeColor;
           &:hover {
-            background: hsl(20, 83%, 60%);
+            background: $themeHover;
           }
         }
         .error {

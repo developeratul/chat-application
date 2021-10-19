@@ -1,0 +1,265 @@
+@import "../var";
+@import "../mixin";
+
+.inbox_content_container {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: 300px 1fr;
+  .toggle_side_bar_button {
+    display: none;
+    position: fixed;
+    top: 40%;
+    left: 0;
+    button {
+      background: $backgroundSecondary;
+      color: #fff;
+      border: none;
+      padding: 15px;
+      border-radius: 0 100% 100% 0;
+    }
+  }
+
+  .sideBar {
+    background: $backgroundSecondary;
+    overflow-x: hidden;
+    border-right: 1px solid $background;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    z-index: 5;
+    position: relative;
+
+    .closeSideBarButton {
+      position: absolute;
+      top: 40%;
+      right: 0;
+      display: none;
+      button {
+        background: $background;
+        color: #fff;
+        border: none;
+        padding: 15px;
+        border-radius: 100% 0 0 100%;
+      }
+    }
+
+    .searchBar {
+      overflow: hidden;
+      padding: 10px;
+      input {
+        width: 100%;
+        padding: 8px;
+        border: 2px solid transparent;
+        color: #fff;
+        background: $background;
+        &:focus {
+          border-color: $themeSecondary;
+        }
+      }
+    }
+
+    .conversationsList {
+      overflow-x: hidden;
+      .single_conversation {
+        display: block;
+        padding: 10px;
+        border-bottom: 1px solid $gray;
+        transition: 0.3s;
+        &:hover {
+          background: $backgroundSecondaryHover;
+        }
+        &:last-child {
+          border-bottom: none;
+        }
+        display: flex;
+        align-items: center;
+        grid-column-gap: 10px;
+        .conversation_image {
+          width: 50px;
+          height: 50px;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            object-fit: cover;
+            border: 2px solid $themeColor;
+          }
+        }
+        .conversation_details {
+          .username {
+            color: $themeSecondary;
+            margin-bottom: 5px;
+          }
+          .lastSent {
+            font-size: 0.8rem;
+            color: $gray;
+          }
+        }
+      }
+    }
+
+    .addNewConversation {
+      overflow: hidden;
+      padding: 10px;
+      button {
+        width: 100%;
+        @include buttonStyle($themeSecondary, 8px, $themeSecondaryHover);
+      }
+    }
+  }
+
+  .conversation {
+    display: grid;
+    overflow: hidden;
+    grid-template-rows: 60px 1fr 60px;
+    .topBar {
+      background: $backgroundSecondary;
+      overflow: hidden;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      .user_avatar_and_name {
+        display: flex;
+        align-items: center;
+        grid-column-gap: 20px;
+        .userAvatar {
+          width: 40px;
+          height: 40px;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 100%;
+            border: 2px solid $themeColor;
+          }
+        }
+        .username {
+          color: $themeSecondary;
+          font-weight: 300;
+        }
+      }
+      .delete_button {
+        button {
+          @include buttonStyle($errorColor, 10px 15px, hsl(357, 81%, 60%));
+        }
+      }
+    }
+
+    .messages {
+      overflow-x: hidden;
+    }
+
+    .sendMessage {
+      overflow: hidden;
+      padding: 10px;
+      background: $backgroundSecondary;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 50px 1fr 50px;
+      grid-column-gap: 10px;
+      div {
+        button,
+        input {
+          width: 100%;
+        }
+
+        button {
+          @include buttonStyle($themeColor, 10px, $themeHover);
+        }
+
+        input {
+          border: 2px solid #fff;
+          padding: 10px;
+          &:focus {
+            border-color: $themeColor;
+          }
+        }
+      }
+    }
+  }
+}
+
+.start_new_chat_modal_content_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  display: grid;
+  place-items: center;
+  z-index: 10;
+  display: none;
+  .start_new_chat_modal {
+    width: 95%;
+    max-width: 400px;
+    padding: 30px;
+    background: $backgroundSecondary;
+    border-radius: 5px;
+    position: relative;
+    .close_modal_button {
+      position: absolute;
+      top: -10px;
+      right: -5px;
+      background: none;
+      font-size: 1.5rem;
+      border: none;
+      color: $themeSecondary;
+      transition: 0.3s;
+      &:hover {
+        color: $errorColor;
+      }
+    }
+    .modal_content {
+      .modal_heading {
+        color: $themeColor;
+        text-align: center;
+        font-weight: 300;
+        margin-bottom: 20px;
+      }
+      .search_field {
+        width: 100%;
+        input {
+          width: 100%;
+          background: $background;
+          border: 2px solid transparent;
+          padding: 10px;
+          color: #fff;
+          &:focus {
+            border-color: $themeColor;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .inbox_content_container {
+    grid-template-columns: 1fr;
+    .toggle_side_bar_button {
+      display: block;
+    }
+
+    .sideBar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      max-width: 350px;
+      transform: translate(-100%);
+      transition: 0.5s;
+
+      .closeSideBarButton {
+        display: block;
+      }
+    }
+
+    .active_side_bar {
+      transform: translate(0);
+    }
+  }
+}

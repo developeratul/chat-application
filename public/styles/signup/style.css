@@ -52,9 +52,12 @@
 .sign_up_page_content_container .sign_up_form form.fields_container .single_field button,
 .sign_up_page_content_container .sign_up_form form.fields_container .single_field span {
   background: #95e6cb;
+  border: none;
   color: #fff;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  padding: 10px;
+  cursor: pointer;
   text-align: center;
   font-size: 0.9rem;
 }
