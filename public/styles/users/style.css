@@ -6,7 +6,6 @@
   text-align: center;
   color: #f29e74;
   margin-bottom: 30px;
-  font-weight: 300;
 }
 
 .users_page_content_container .users_table {
@@ -27,7 +26,6 @@
 .users_page_content_container .users_table table thead tr th {
   border-bottom: 1px solid #cccac2;
   padding: 10px;
-  font-weight: 300;
   color: #95e6cb;
   text-align: center;
 }

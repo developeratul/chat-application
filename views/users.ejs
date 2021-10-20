@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="./styles/users/style.css" />
     <script src="http://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
+
   <body>
     <main>
       <%- include("./partials/nav.ejs") %>
@@ -21,7 +22,8 @@
                 </tr>
               </thead>
               <tbody>
-                <% users.forEach((user) => { %>
+                <!-- if we have users how up all the user data -->
+                <% if(users && users.length){ %> <% users.forEach(function(user) { %>
                 <tr id="<%= user._id%>">
                   <td class="name">
                     <% if (user.avatar){ %>
@@ -29,14 +31,19 @@
                     <% } else { %>
                     <img src="./assets/nophoto.png" alt="<%= user.name %>" />
                     <% } %>
-                    <span><%= user.name %></span>
+                    <span> <%= user.name %> </span>
                   </td>
                   <td class="user_email"><%= user.email %></td>
                   <td class="manage">
                     <button onclick="deleteUser('<%=user._id%>')" class="delete_user">Delete</button>
                   </td>
                 </tr>
-                <% }) %>
+                <!-- if there is no user this block should be shown -->
+                <% }); %> <% } else{ %>
+                <tr>
+                  <td style="padding: 20px 0" colspan="3">No users found</td>
+                </tr>
+                <% } %>
               </tbody>
             </table>
           </div>

@@ -13,11 +13,15 @@
     top: 40%;
     left: 0;
     button {
-      background: $backgroundSecondary;
+      background: $themeSecondaryLessOpacity;
       color: #fff;
       border: none;
       padding: 15px;
       border-radius: 0 100% 100% 0;
+      transition: 0.3s;
+      &:hover {
+        background: $themeSecondary;
+      }
     }
   }
 
@@ -36,7 +40,7 @@
       right: 0;
       display: none;
       button {
-        background: $background;
+        background: $themeSecondary;
         color: #fff;
         border: none;
         padding: 15px;
@@ -83,7 +87,7 @@
             height: 100%;
             border-radius: 100%;
             object-fit: cover;
-            border: 2px solid $themeColor;
+            border: 2px solid $themeSecondary;
           }
         }
         .conversation_details {
@@ -132,12 +136,11 @@
             height: 100%;
             object-fit: cover;
             border-radius: 100%;
-            border: 2px solid $themeColor;
+            border: 2px solid $themeSecondary;
           }
         }
         .username {
           color: $themeSecondary;
-          font-weight: 300;
         }
       }
       .delete_button {
@@ -192,6 +195,8 @@
   place-items: center;
   z-index: 10;
   display: none;
+  overflow-x: hidden;
+  padding: 20px 0;
   .start_new_chat_modal {
     width: 95%;
     max-width: 400px;
@@ -199,6 +204,7 @@
     background: $backgroundSecondary;
     border-radius: 5px;
     position: relative;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.534);
     .close_modal_button {
       position: absolute;
       top: -10px;
@@ -216,11 +222,11 @@
       .modal_heading {
         color: $themeColor;
         text-align: center;
-        font-weight: 300;
         margin-bottom: 20px;
       }
       .search_field {
         width: 100%;
+        margin-bottom: 10px;
         input {
           width: 100%;
           background: $background;
@@ -229,6 +235,45 @@
           color: #fff;
           &:focus {
             border-color: $themeColor;
+          }
+        }
+      }
+
+      .search_error {
+        font-size: 0.8rem;
+        color: $errorColor;
+        display: none;
+      }
+
+      .search_results {
+        width: 100%;
+        max-height: 300px;
+        overflow-x: hidden;
+        display: none;
+        .result {
+          width: 100%;
+          background: $background;
+          padding: 10px;
+          border-radius: 5px;
+          display: flex;
+          grid-column-gap: 20px;
+          overflow: hidden;
+          align-items: center;
+          margin-bottom: 10px;
+          cursor: pointer;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          .userImg {
+            width: 50px;
+            height: 50px;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              border-radius: 100%;
+              border: 2px solid $themeColor;
+            }
           }
         }
       }

@@ -26,12 +26,7 @@ dataSchema.pre("save", function (next) {
 dataSchema.methods.generateToken = function () {
   try {
     const user = this;
-    const userObject = {
-      id: user._id,
-      role: user.role,
-      name: user.name,
-      email: user.email,
-    };
+    const userObject = { id: user._id };
     const secretKey = process.env.JWT_SECRET;
     const jwtOptions = { expiresIn: process.env.JWT_EXPIRY };
     const token = jwt.sign(userObject, secretKey, jwtOptions);

@@ -13,6 +13,7 @@
 
 ::-webkit-scrollbar {
   width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -31,6 +32,25 @@ body {
   overflow: hidden;
 }
 
+button,
+a,
+li,
+img {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+h1,
+h2,
+h3,
+p,
+span,
+a {
+  font-weight: 300;
+}
+
 button {
   cursor: pointer;
 }
@@ -38,8 +58,8 @@ button {
 main {
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 50px 1fr;
-      grid-template-rows: 50px 1fr;
+  -ms-grid-rows: 60px 1fr;
+      grid-template-rows: 60px 1fr;
   height: 100%;
 }
 
@@ -56,7 +76,6 @@ nav {
       flex-wrap: wrap;
   padding: 5px 0;
   background: #1a1f29;
-  overflow: hidden;
   border-bottom: 1px solid #242936;
 }
 
@@ -69,9 +88,6 @@ nav .nav_links {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -80,6 +96,62 @@ nav .nav_links {
 nav .nav_links li {
   list-style: none;
   margin-right: 20px;
+  position: relative;
+}
+
+nav .nav_links li:last-child {
+  margin-right: 0;
+}
+
+nav .nav_links li:hover .sub_list {
+  -webkit-transform: scaleY(1);
+          transform: scaleY(1);
+  visibility: visible;
+}
+
+nav .nav_links li .sub_list {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 250px;
+  background: #1f2831;
+  border-radius: 5px;
+  overflow: hidden;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.363);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.363);
+  -webkit-transform-origin: top;
+          transform-origin: top;
+  -webkit-transform: scaleY(0);
+          transform: scaleY(0);
+  visibility: hidden;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+nav .nav_links li .sub_list li {
+  cursor: pointer;
+  width: 100%;
+  padding: 20px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  border-bottom: 1px solid #b8cfe680;
+}
+
+nav .nav_links li .sub_list li:last-child {
+  border-bottom: none;
+}
+
+nav .nav_links li .sub_list li:hover {
+  background: #111722;
+}
+
+nav .nav_links li img {
+  display: block;
+  width: 35px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 100%;
+  cursor: pointer;
 }
 
 nav .nav_links li:last-child {
@@ -185,6 +257,7 @@ nav .nav_links li a:hover {
   display: -ms-grid;
   display: grid;
   place-items: center;
+  overflow-x: auto;
 }
 
 .error_page_content_container .error_page_content {

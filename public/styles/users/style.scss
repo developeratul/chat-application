@@ -6,7 +6,6 @@
     text-align: center;
     color: $themeColor;
     margin-bottom: 30px;
-    font-weight: 300;
   }
   .users_table {
     width: 100%;
@@ -23,7 +22,6 @@
           th {
             border-bottom: 1px solid $textColor;
             padding: 10px;
-            font-weight: 300;
             color: $themeSecondary;
             text-align: center;
           }

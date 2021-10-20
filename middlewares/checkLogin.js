@@ -1,50 +1,53 @@
 const jwt = require("jsonwebtoken");
+const people = require("../models/people");
 
-function checkLogin(req, res, next) {
+async function checkLogin(req, res, next) {
   const cookies = Object.keys(req.signedCookies).length > 0 ? req.signedCookies : null;
 
   if (cookies) {
     try {
-      token = cookies[process.env.COOKIE_NAME];
+      const token = cookies[process.env.COOKIE_NAME];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = decoded;
+      const user = await people.findOne({ _id: decoded.id });
 
-      // pass user info to response locals
-      if (res.locals.html) {
-        res.locals.loggedInUser = decoded;
-      }
-      next();
-    } catch (err) {
-      if (res.locals.html) {
-        res.redirect("/");
+      if (!user) {
+        if (res.locals.html) {
+          res.render("index");
+        } else {
+          res.status(401).json({ msg: "Unauthorized!" });
+        }
       } else {
-        res.status(500).json({
-          errors: {
-            common: {
-              msg: "Authentication failure!",
-            },
-          },
-        });
+        req.user = user;
+        res.locals.loggedInUser = user;
+        next();
       }
+    } catch (err) {
+      res.status(500).json({ errors: { common: { msg: err.message } } });
     }
   } else {
     if (res.locals.html) {
       res.redirect("/");
     } else {
-      res.status(401).json({
-        error: "Authentication failure!",
-      });
+      res.status(401).json({ msg: "Unauthorized!" });
     }
   }
 }
 
-const redirectLoggedIn = function (req, res, next) {
+const redirectLoggedIn = async function (req, res, next) {
   let cookies = Object.keys(req.signedCookies).length > 0 ? req.signedCookies : null;
 
-  if (!cookies) {
-    next();
+  if (cookies) {
+    const token = cookies[process.env.COOKIE_NAME];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await people.findOne({ _id: decoded.id });
+
+    if (!user) {
+      next();
+    } else {
+      res.redirect("/inbox");
+    }
   } else {
-    res.redirect("/inbox");
+    next();
   }
 };
 
