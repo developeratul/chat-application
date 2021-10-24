@@ -65,23 +65,33 @@
 
     .conversationsList {
       overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      flex-direction: column;
+      .active-conversation {
+        background: $backgroundSecondaryHover;
+      }
       .single_conversation {
         display: block;
         padding: 10px;
         border-bottom: 1px solid $gray;
         transition: 0.3s;
+        cursor: pointer;
+        user-select: none;
         &:hover {
           background: $backgroundSecondaryHover;
         }
         &:last-child {
           border-bottom: none;
         }
-        display: flex;
+        display: grid;
         align-items: center;
+        grid-template-columns: 50px 1fr;
         grid-column-gap: 10px;
         .conversation_image {
-          width: 50px;
+          width: 100%;
           height: 50px;
+          overflow: hidden;
           img {
             width: 100%;
             height: 100%;
@@ -91,6 +101,7 @@
           }
         }
         .conversation_details {
+          overflow: hidden;
           .username {
             color: $themeSecondary;
             margin-bottom: 5px;
@@ -99,6 +110,27 @@
             font-size: 0.8rem;
             color: $gray;
           }
+        }
+      }
+
+      .no_message_container {
+        display: grid;
+        align-self: center;
+        place-items: center;
+        margin: auto;
+        grid-row-gap: 20px;
+        padding: 10px;
+        .no_image {
+          width: 100%;
+          max-width: 180px;
+          img {
+            width: 100%;
+          }
+        }
+        .no_message {
+          text-align: center;
+          color: $gray;
+          font-family: Noto Sans Mono;
         }
       }
     }
@@ -117,6 +149,14 @@
     display: grid;
     overflow: hidden;
     grid-template-rows: 60px 1fr 60px;
+    .no_message {
+      grid-row: 1 / -1;
+      align-self: center;
+      justify-self: center;
+      font-family: Noto sans Mono;
+      color: $gray;
+    }
+
     .topBar {
       background: $backgroundSecondary;
       overflow: hidden;
@@ -124,6 +164,7 @@
       justify-content: space-around;
       align-items: center;
       flex-wrap: wrap;
+      display: none;
       .user_avatar_and_name {
         display: flex;
         align-items: center;
@@ -152,6 +193,16 @@
 
     .messages {
       overflow-x: hidden;
+      display: none;
+      .start-message {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Noto Sans Mono;
+        color: $gray;
+      }
     }
 
     .sendMessage {
@@ -162,6 +213,7 @@
       align-items: center;
       grid-template-columns: 50px 1fr 50px;
       grid-column-gap: 10px;
+      display: none;
       div {
         button,
         input {
@@ -252,6 +304,7 @@
         display: none;
         .result {
           width: 100%;
+          user-select: none;
           background: $background;
           padding: 10px;
           border-radius: 5px;

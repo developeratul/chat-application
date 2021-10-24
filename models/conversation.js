@@ -2,9 +2,20 @@ const mongoose = require("mongoose");
 
 const dataSchema = new mongoose.Schema(
   {
-    creator: { type: mongoose.Schema.Types.ObjectId, name: String, avatar: String },
-    participant: { type: mongoose.Schema.Types.ObjectId, name: String, avatar: String },
-    last_updated: { type: Date, default: Date.now() },
+    creator: {
+      id: mongoose.Types.ObjectId,
+      name: String,
+      avatar: String,
+    },
+    participant: {
+      id: mongoose.Types.ObjectId,
+      name: String,
+      avatar: String,
+    },
+    last_updated: {
+      type: Date,
+      default: Date.now(),
+    },
   },
   { timestamps: true }
 );

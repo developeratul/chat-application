@@ -55,6 +55,7 @@ searchInput.addEventListener("keydown", () => {
   }
 });
 
+// for searching users when typing on the search bar
 async function searchUsers() {
   try {
     const errorPlaceholder = document.querySelector(".search_error");
@@ -76,9 +77,12 @@ async function searchUsers() {
         results.map((result) => {
           const avatar = result.avatar ? "./uploads/avatars/" + result.avatar : "./assets/nophoto.png";
           const resultHtml = `
-          <div class="result">
+          <div
+            onclick="createConversation('${result._id}', '${result.name}', '${result.avatar}')"
+            class="result"
+          >
             <div class="userImg">
-              <img src=${avatar} alt=${result.name} />
+              <img src="${avatar}" alt="${result.name}" />
             </div>
             <p class="user_name">${result.name}</p>
           </div>
@@ -88,6 +92,42 @@ async function searchUsers() {
           searchResultContainer.style.display = "block";
         });
       }
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// for creating a new conversation after clicking on a search result
+async function createConversation(userId, username, userAvatar) {
+  try {
+    const res = await fetch("/inbox/createConversation", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        participant: username,
+        id: userId,
+        avatar: userAvatar != "undefined" ? userAvatar : null,
+      }),
+    });
+    const body = await res.json();
+
+    if (!body.errors) {
+      if (res.ok) {
+        searchResultContainer.style.display = "none";
+        searchInput.value = username;
+        setTimeout(() => {
+          closeModal();
+          setTimeout(() => {
+            closeModal();
+            setTimeout(() => {
+              window.location.reload();
+            }, 500);
+          }, 500);
+        }, 500);
+      }
+    } else {
+      throw new Error(body.errors.common.msg);
     }
   } catch (err) {
     console.log(err);

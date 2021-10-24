@@ -75,6 +75,18 @@
 
 .inbox_content_container .sideBar .conversationsList {
   overflow-x: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  flex-direction: column;
+}
+
+.inbox_content_container .sideBar .conversationsList .active-conversation {
+  background: #111722;
 }
 
 .inbox_content_container .sideBar .conversationsList .single_conversation {
@@ -83,12 +95,18 @@
   border-bottom: 1px solid #b8cfe680;
   -webkit-transition: 0.3s;
   transition: 0.3s;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  display: -ms-grid;
+  display: grid;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -ms-grid-columns: 50px 1fr;
+      grid-template-columns: 50px 1fr;
   grid-column-gap: 10px;
 }
 
@@ -101,8 +119,9 @@
 }
 
 .inbox_content_container .sideBar .conversationsList .single_conversation .conversation_image {
-  width: 50px;
+  width: 100%;
   height: 50px;
+  overflow: hidden;
 }
 
 .inbox_content_container .sideBar .conversationsList .single_conversation .conversation_image img {
@@ -114,6 +133,10 @@
   border: 2px solid #95e6cb;
 }
 
+.inbox_content_container .sideBar .conversationsList .single_conversation .conversation_details {
+  overflow: hidden;
+}
+
 .inbox_content_container .sideBar .conversationsList .single_conversation .conversation_details .username {
   color: #95e6cb;
   margin-bottom: 5px;
@@ -122,6 +145,32 @@
 .inbox_content_container .sideBar .conversationsList .single_conversation .conversation_details .lastSent {
   font-size: 0.8rem;
   color: #b8cfe680;
+}
+
+.inbox_content_container .sideBar .conversationsList .no_message_container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-row-align: center;
+      align-self: center;
+  place-items: center;
+  margin: auto;
+  grid-row-gap: 20px;
+  padding: 10px;
+}
+
+.inbox_content_container .sideBar .conversationsList .no_message_container .no_image {
+  width: 100%;
+  max-width: 180px;
+}
+
+.inbox_content_container .sideBar .conversationsList .no_message_container .no_image img {
+  width: 100%;
+}
+
+.inbox_content_container .sideBar .conversationsList .no_message_container .no_message {
+  text-align: center;
+  color: #b8cfe680;
+  font-family: Noto Sans Mono;
 }
 
 .inbox_content_container .sideBar .addNewConversation {
@@ -158,6 +207,17 @@
       grid-template-rows: 60px 1fr 60px;
 }
 
+.inbox_content_container .conversation .no_message {
+  grid-row: 1 / -1;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  font-family: Noto sans Mono;
+  color: #b8cfe680;
+}
+
 .inbox_content_container .conversation .topBar {
   background: #1a1f29;
   overflow: hidden;
@@ -171,6 +231,7 @@
           align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  display: none;
 }
 
 .inbox_content_container .conversation .topBar .user_avatar_and_name {
@@ -223,6 +284,23 @@
 
 .inbox_content_container .conversation .messages {
   overflow-x: hidden;
+  display: none;
+}
+
+.inbox_content_container .conversation .messages .start-message {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: Noto Sans Mono;
+  color: #b8cfe680;
 }
 
 .inbox_content_container .conversation .sendMessage {
@@ -237,6 +315,7 @@
   -ms-grid-columns: 50px 1fr 50px;
       grid-template-columns: 50px 1fr 50px;
   grid-column-gap: 10px;
+  display: none;
 }
 
 .inbox_content_container .conversation .sendMessage div button,
@@ -355,6 +434,10 @@
 
 .start_new_chat_modal_content_container .start_new_chat_modal .modal_content .search_results .result {
   width: 100%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   background: #242936;
   padding: 10px;
   border-radius: 5px;

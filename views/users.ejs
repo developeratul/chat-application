@@ -59,7 +59,7 @@
         });
         const { message } = await res.json();
 
-        if (true) {
+        if (res.ok) {
           document.getElementById(userId).remove();
           Swal.fire({
             position: "center",
