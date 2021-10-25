@@ -32,6 +32,10 @@ body {
   overflow: hidden;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 button,
 a,
 li,

@@ -5,8 +5,10 @@ module.exports = {
   getInbox: async function (req, res, next) {
     try {
       const conversations = await Conversation.find({
-        $or: [{ "creator.id": req.user._id }, { "participant.id": req.user._id }],
-      }).sort({ updatedAt: -1 });
+        $or: [{ creator: req.user._id }, { participant: req.user._id }],
+      })
+        .populate("creator participant")
+        .sort({ updatedAt: -1 });
       res.locals.data = conversations;
       res.render("inbox");
     } catch (err) {
@@ -17,8 +19,10 @@ module.exports = {
   getConversationsInJSONformat: async function (req, res, next) {
     try {
       const conversations = await Conversation.find({
-        $or: [{ "creator.id": req.user._id }, { "participant.id": req.user._id }],
-      }).sort({ updatedAt: -1 });
+        $or: [{ creator: req.user._id }, { participant: req.user._id }],
+      })
+        .sort({ updatedAt: -1 })
+        .populate("creator participant");
 
       res.send(conversations);
     } catch (err) {
@@ -29,16 +33,8 @@ module.exports = {
   createConversation: async function (req, res) {
     try {
       const newConversation = new Conversation({
-        creator: {
-          id: req.user._id,
-          name: req.user.name,
-          avatar: req.user.avatar || null,
-        },
-        participant: {
-          id: req.body.id,
-          name: req.body.participant,
-          avatar: req.body.avatar || null,
-        },
+        creator: req.user._id,
+        participant: req.body.id,
       });
 
       await newConversation.save();
@@ -48,19 +44,19 @@ module.exports = {
       });
     } catch (err) {
       res.status(500).json({
-        errors: {
-          common: {
-            msg: err.message,
-          },
-        },
+        errors: { common: { msg: err.message } },
       });
     }
   },
 
   getMessages: async function (req, res) {
     try {
-      const messages = await Message.find({ conversation_id: req.params.conversationId }).sort("createdAt");
-      const { participant, creator } = await Conversation.findById(req.params.conversationId);
+      const messages = await Message.find({ conversation_id: req.params.conversationId })
+        .sort("createdAt")
+        .populate("sender receiver");
+      const { participant, creator } = await Conversation.findById(req.params.conversationId).populate(
+        "creator participant"
+      );
 
       res.status(201).json({
         data: { messages, participant, creator },
@@ -89,31 +85,20 @@ module.exports = {
         const newMessage = new Message({
           text: req.body.message,
           attachment: attachments,
-          sender: {
-            id: req.user._id,
-            name: req.user.name,
-            avatar: req.user.avatar || null,
-          },
-          receiver: {
-            id: req.body.receiverId,
-            name: req.body.receiverName,
-            avatar: req.body.avatar || null,
-          },
+          sender: req.user._id,
+          receiver: req.body.receiverId,
           conversation_id: req.body.conversationId,
         });
 
         await newMessage.save();
+        await Conversation.updateOne({ _id: req.body.conversationId }, { last_updated: Date.now() });
 
         res.status(201).json({ msg: "Your message has been sent" });
       }
     } catch (err) {
       console.log("there was an error", err);
       res.status(500).json({
-        errors: {
-          common: {
-            msg: err.message,
-          },
-        },
+        errors: { common: { msg: err.message } },
       });
     }
   },

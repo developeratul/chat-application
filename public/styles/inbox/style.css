@@ -307,7 +307,7 @@
 .inbox_content_container .conversation .messages .message {
   width: 100%;
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: #fff;
   padding: 10px;
 }
@@ -332,12 +332,14 @@
 }
 
 .inbox_content_container .conversation .messages .message .messageContent .avatar {
-  width: 50px;
+  width: 100%;
+  height: 50px;
   overflow: hidden;
 }
 
 .inbox_content_container .conversation .messages .message .messageContent .avatar img {
   width: 100%;
+  height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 100%;
@@ -360,6 +362,34 @@
   text-align: start;
 }
 
+.inbox_content_container .conversation .messages .message .attachmentsContainer {
+  margin-top: 10px;
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 5px;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.inbox_content_container .conversation .messages .message .attachmentsContainer .attachment {
+  cursor: pointer;
+  border: 2px solid #b8cfe680;
+  border-radius: 5px;
+  background: #1a1f29;
+}
+
+.inbox_content_container .conversation .messages .message .attachmentsContainer .attachment img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  max-height: 150px;
+}
+
 .inbox_content_container .conversation .messages .you-message .messageContent {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
@@ -368,6 +398,14 @@
 
 .inbox_content_container .conversation .messages .you-message .messageContent .messageText {
   background: #f29e74;
+}
+
+.inbox_content_container .conversation .messages .you-message .attachmentsContainer {
+  place-content: flex-end;
+}
+
+.inbox_content_container .conversation .messages .you-message .attachmentsContainer .attachment {
+  border-color: #f29e74;
 }
 
 .inbox_content_container .conversation .messages .you-message .message-time {
@@ -443,6 +481,59 @@
 
 .inbox_content_container .conversation .sendMessage div input:focus {
   border-color: #f29e74;
+}
+
+.preview_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 11;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  overflow-x: hidden;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+
+.preview_container img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 95%;
+  max-height: 95vh;
+  height: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+  border-radius: 5px;
+}
+
+.preview_container .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.preview_container .close button {
+  background: #f29e74;
+  border: none;
+  color: #fff;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  padding: 10px 20px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.preview_container .close button:hover {
+  background: #ee7d44;
+}
+
+.preview_container .close button:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
 }
 
 .start_new_chat_modal_content_container {

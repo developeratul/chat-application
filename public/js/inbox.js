@@ -130,3 +130,24 @@ async function createConversation(userId, username, userAvatar) {
     console.log(err);
   }
 }
+
+// for closing the attachment preview
+function closePreview(src) {
+  const img = document.querySelector(`img[src='${src}']`);
+  const previewContainer = img.parentElement;
+  document.body.removeChild(previewContainer);
+}
+
+// for showing up a full preview of attachments
+function showFullImg(src) {
+  const previewHTML = `
+  <div class="preview_container">
+    <img src="${src}" alt="${src}" />
+    <div class="close">
+      <button onclick="closePreview('${src}')">Close</button>
+    </div>
+  </div>
+  `;
+
+  document.body.insertAdjacentHTML("afterbegin", previewHTML);
+}

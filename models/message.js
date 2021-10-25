@@ -4,16 +4,8 @@ const dataSchema = mongoose.Schema(
   {
     text: { type: String },
     attachment: [],
-    sender: {
-      id: mongoose.Types.ObjectId,
-      name: String,
-      avatar: String,
-    },
-    receiver: {
-      id: mongoose.Types.ObjectId,
-      name: String,
-      avatar: String,
-    },
+    sender: { type: mongoose.Schema.Types.ObjectId, ref: "People" },
+    receiver: { type: mongoose.Schema.Types.ObjectId, ref: "People" },
     date_time: {
       type: Date,
       default: Date.now,

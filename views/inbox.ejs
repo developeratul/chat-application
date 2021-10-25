@@ -30,7 +30,7 @@
               <div class="conversationsList">
                 <% if (data && data.length> 0) { %>
                   <% data.forEach((conversation)=> { %>
-                    <% if (conversation.creator.id.toString()===loggedInUser._id.toString()) { %>
+                    <% if (conversation.creator._id.toString()===loggedInUser._id.toString()) { %>
                       <div id="<%= conversation._id %>" class="single_conversation"
                         onclick="getMessages('<%= conversation._id %>', '<%= conversation.participant.name %>')">
                         <div class="conversation_image">
@@ -174,30 +174,34 @@
                   let senderAvatar = message.sender.avatar
                     ? `./uploads/avatars/${message.sender.avatar}`
                     : "./assets/nophoto.png";
-                  const messageClass = message.sender.id === loggedInUserId ? "you-message" : "other-message";
-                  const showAvatar = message.sender.id === loggedInUserId ? "" : `<img src="${senderAvatar}" alt="${message.sender.name}" />`;
+                  const messageClass = message.sender._id === loggedInUserId ? "you-message" : "other-message";
+                  const showAvatar = message.sender._id === loggedInUserId ? "" : `<img src="${senderAvatar}" alt="${message.sender.name}" />`;
 
-                  let attachments = "<div class='attachments'></div>";
+                  let attachments = "<div class='attachmentsContainer'>";
 
                   if (message.attachment && message.attachment.length > 0) {
                     message.attachment.forEach((att) => {
-                      attachments += `<img src="./uploads/attachments/${att}" alt="${att}" />`
+                      attachments += `
+                        <div class="attachment" onclick="showFullImg('./uploads/attachments/${att}')">
+                          <img src="./uploads/attachments/${att}" alt="${att}" />
+                        </div>
+                      `
                     })
                   }
 
                   attachments += "</div>"
 
                   let messageHTML = `
-                    <div class="message ${messageClass}">
-                      <div class="messageContent">
-                        <div class="avatar">
-                          ${showAvatar}
-                        </div>
-                        <div class="messageText">${message.text}</div>
-                          ${attachments}
-                        <div class="message-time">${new Date(message.date_time).toLocaleTimeString()}</div>
-                      </div>  
+                  <div class="message ${messageClass}">
+                    <div class="messageContent">
+                      <div class="avatar">
+                        ${showAvatar}
+                      </div>
+                      <div class="messageText">${message.text}</div>
                     </div>
+                    ${attachments}
+                    <div class="message-time">${new Date(message.date_time).toLocaleTimeString()}</div>
+                  </div>
                   `
 
                   allMessages += messageHTML;
@@ -213,7 +217,7 @@
               }
 
               conversation_topBar_username_container.textContent = currentConversationName
-              conversation_topBar_avatar.src = participant.id.toString() === loggedInUserId.toString() ?
+              conversation_topBar_avatar.src = participant._id.toString() === loggedInUserId.toString() ?
                 creator.avatar ? `./uploads/avatars/${creator.avatar}` : "./assets/nophoto.png" :
                 participant.avatar ? `./uploads/avatars/${participant.avatar}` : "./assets/nophoto.png"
 
@@ -253,7 +257,7 @@
 
         const formData = new FormData(form)
 
-        formData.append("receiverId", participant.id)
+        formData.append("receiverId", participant._id)
         formData.append("receiverName", participant.name)
         formData.append("avatar", participant.avatar)
         formData.append("conversationId", current_conversation_id)
@@ -289,7 +293,7 @@
         const [conversation] = await res.json()
 
         if (conversation) {
-          getMessages(conversation._id, "<%= loggedInUser._id %>".toString() === conversation.creator.id.toString() ? conversation.participant.name : conversation.creator.name)
+          getMessages(conversation._id, "<%= loggedInUser._id %>".toString() === conversation.creator._id.toString() ? conversation.participant.name : conversation.creator.name)
         }
       }
     </script>
