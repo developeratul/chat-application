@@ -77,15 +77,12 @@ async function searchUsers() {
         results.map((result) => {
           const avatar = result.avatar ? "./uploads/avatars/" + result.avatar : "./assets/nophoto.png";
           const resultHtml = `
-          <div
-            onclick="createConversation('${result._id}', '${result.name}', '${result.avatar}')"
-            class="result"
-          >
+            <div onclick="createConversation('${result._id}', '${result.name}', '${result.avatar}')" class="result">
             <div class="userImg">
               <img src="${avatar}" alt="${result.name}" />
             </div>
             <p class="user_name">${result.name}</p>
-          </div>
+            </div>
           `;
 
           searchResultContainer.insertAdjacentHTML("afterbegin", resultHtml);

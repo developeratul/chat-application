@@ -102,15 +102,18 @@
 
               <div class="messages"></div>
 
-              <div class="sendMessage">
+              <form enctype="multipart/form-data" method="post" class="sendMessage">
                 <div class="sendImageButton">
-                  <button><i class="far fa-images"></i></button>
+                  <label for="file-upload">
+                    <input id="file-upload" name="attachment" style="display: none;" type="file" multiple>
+                    <span><i class="far fa-images"></i></span>
+                  </label>
                 </div>
-                <div class="messageInput"><input type="text" placeholder="Enter your message" /></div>
+                <div class="messageInput"><input type="text" name="message" placeholder="Enter your message" /></div>
                 <div class="sendButton">
-                  <button><i class="far fa-paper-plane"></i></button>
+                  <button type="submit"><i class="far fa-paper-plane"></i></button>
                 </div>
-              </div>
+              </form>
 
               <h2 class="no_message">Open a conversation</h2>
             </div>
@@ -143,6 +146,8 @@
           });
           const body = await res.json();
 
+          // to add an active conversation to the first conversation so the user can understand which
+          // conversation is opened
           const conversations = document.querySelectorAll(".conversationsList .single_conversation")
 
           conversations.forEach((conversation) => {
@@ -155,11 +160,11 @@
             conversation_sendMessage.style.display = "grid";
             conversation_topBar.style.display = "flex";
 
-            const { data, user, conversationId } = body;
+            const { data, user, conversation_id } = body;
 
             participant = data.participant;
             creator = data.creator;
-            current_conversation_id = conversationId;
+            current_conversation_id = conversation_id;
 
             if (data.messages) {
               let allMessages = "";
@@ -170,7 +175,7 @@
                     ? `./uploads/avatars/${message.sender.avatar}`
                     : "./assets/nophoto.png";
                   const messageClass = message.sender.id === loggedInUserId ? "you-message" : "other-message";
-                  const showAvatar = message.sender.id === loggedInUserId ? '' : `<img src="${senderAvatar}" alt="${message.sender.name}" />`;
+                  const showAvatar = message.sender.id === loggedInUserId ? "" : `<img src="${senderAvatar}" alt="${message.sender.name}" />`;
 
                   let attachments = "<div class='attachments'></div>";
 
@@ -185,24 +190,34 @@
                   let messageHTML = `
                     <div class="message ${messageClass}">
                       <div class="messageContent">
-                        ${showAvatar}
+                        <div class="avatar">
+                          ${showAvatar}
+                        </div>
                         <div class="messageText">${message.text}</div>
-                        ${attachments}
+                          ${attachments}
                         <div class="message-time">${new Date(message.date_time).toLocaleTimeString()}</div>
                       </div>  
                     </div>
                   `
 
                   allMessages += messageHTML;
+
+                  // insert all the messages
                   conversation_messages.innerHTML = allMessages;
+
+                  // scroll the bottom of the section
+                  conversation_messages.scrollTo(0, conversation_messages.scrollHeight)
                 });
               } else if (data.messages.length === 0) {
                 conversation_messages.innerHTML = "<h2 class='start-message'>Start Chatting</h2>"
               }
 
               conversation_topBar_username_container.textContent = currentConversationName
-              conversation_topBar_avatar.src = participant.id.toString() === loggedInUserId.toString() ? creator.avatar ? `./uploads/avatars/${creator.avatar}` : "./assets/nophoto.png" : participant.avatar ? `./uploads/avatars/${participant.avatar}` : "./assets/nophoto.png"
+              conversation_topBar_avatar.src = participant.id.toString() === loggedInUserId.toString() ?
+                creator.avatar ? `./uploads/avatars/${creator.avatar}` : "./assets/nophoto.png" :
+                participant.avatar ? `./uploads/avatars/${participant.avatar}` : "./assets/nophoto.png"
 
+              // adding an active class so the user can which is the current chat
               conversations.forEach((conversation) => {
                 if (conversation.id === conversation_Id) {
                   conversation.classList.add("active-conversation")
@@ -230,15 +245,53 @@
         }
       }
 
+      const form = document.querySelector("form.sendMessage")
+
+      // for handling for submit and sending a message
+      form.onsubmit = async function (e) {
+        e.preventDefault()
+
+        const formData = new FormData(form)
+
+        formData.append("receiverId", participant.id)
+        formData.append("receiverName", participant.name)
+        formData.append("avatar", participant.avatar)
+        formData.append("conversationId", current_conversation_id)
+
+        if (formData.get("message") !== "") {
+          try {
+            const res = await fetch("/inbox/message", {
+              method: "POST",
+              body: formData
+            })
+            const body = await res.json()
+
+            if (!body.errors) {
+              form.reset()
+            } else {
+              Swal.fire({
+                position: "center",
+                icon: "error",
+                title: body.errors.common.msg || "Unknown error occurred",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          } catch (err) {
+            console.error(err.message)
+          }
+        }
+      }
+
       // for opening the most recent conversation once the page has been loaded
-      (async () => {
+      window.onload = async () => {
         const res = await fetch("/inbox/getConversationsInJSONformat")
         const [conversation] = await res.json()
 
         if (conversation) {
           getMessages(conversation._id, "<%= loggedInUser._id %>".toString() === conversation.creator.id.toString() ? conversation.participant.name : conversation.creator.name)
         }
-      })()
+      }
     </script>
 </body>
 

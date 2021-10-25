@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const dataSchema = mongoose.Schema(
   {
     text: { type: String },
-    attachment: [{ type: String }],
+    attachment: [],
     sender: {
       id: mongoose.Types.ObjectId,
       name: String,

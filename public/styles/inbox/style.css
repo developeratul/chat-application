@@ -285,6 +285,7 @@
 .inbox_content_container .conversation .messages {
   overflow-x: hidden;
   display: none;
+  padding: 10px;
 }
 
 .inbox_content_container .conversation .messages .start-message {
@@ -301,6 +302,76 @@
           justify-content: center;
   font-family: Noto Sans Mono;
   color: #b8cfe680;
+}
+
+.inbox_content_container .conversation .messages .message {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 20px;
+  color: #fff;
+  padding: 10px;
+}
+
+.inbox_content_container .conversation .messages .message:last-child {
+  margin-bottom: 0;
+}
+
+.inbox_content_container .conversation .messages .message .messageContent {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 50px auto;
+      grid-template-columns: 50px auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  grid-column-gap: 10px;
+}
+
+.inbox_content_container .conversation .messages .message .messageContent .avatar {
+  width: 50px;
+  overflow: hidden;
+}
+
+.inbox_content_container .conversation .messages .message .messageContent .avatar img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 100%;
+  border: 2px solid #f29e74;
+}
+
+.inbox_content_container .conversation .messages .message .messageContent .messageText {
+  padding: 10px;
+  background: #b8cfe680;
+  color: #fff;
+  border-radius: 5px;
+  line-height: 150%;
+}
+
+.inbox_content_container .conversation .messages .message .message-time {
+  font-size: 0.8rem;
+  color: #b8cfe680;
+  font-family: Noto Sans mono;
+  margin-top: 10px;
+  text-align: start;
+}
+
+.inbox_content_container .conversation .messages .you-message .messageContent {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.inbox_content_container .conversation .messages .you-message .messageContent .messageText {
+  background: #f29e74;
+}
+
+.inbox_content_container .conversation .messages .you-message .message-time {
+  text-align: end;
 }
 
 .inbox_content_container .conversation .sendMessage {
@@ -339,6 +410,28 @@
 }
 
 .inbox_content_container .conversation .sendMessage div button:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+.inbox_content_container .conversation .sendMessage div label span {
+  background: #f29e74;
+  border: none;
+  color: #fff;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  padding: unset;
+  cursor: pointer;
+  text-align: center;
+  padding: 10px 18px;
+  border-radius: 2px;
+}
+
+.inbox_content_container .conversation .sendMessage div label span:hover {
+  background: #ee7d44;
+}
+
+.inbox_content_container .conversation .sendMessage div label span:active {
   -webkit-transform: scale(0.95);
           transform: scale(0.95);
 }
