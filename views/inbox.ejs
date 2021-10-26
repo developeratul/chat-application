@@ -5,6 +5,7 @@
   <%- include("./partials/head.ejs") %>
     <link rel="stylesheet" href="./styles/inbox/style.css" />
     <script src="./js/inbox.js" defer></script>
+    <script src="./js/moment.js"></script>
     <script src="https://kit.fontawesome.com/585143586a.js" crossorigin="anonymous"></script>
 </head>
 
@@ -46,8 +47,7 @@
                             <%= conversation.participant.name %>
                           </p>
                           <p class="lastSent">
-                            <%= new Date(conversation.last_updated).toLocaleTimeString() %> - <%= new
-                                Date(conversation.last_updated).toLocaleDateString() %>
+                            <%= moment(conversation.last_updated).fromNow() %>
                           </p>
                         </div>
                       </div>
@@ -67,8 +67,7 @@
                               <%= conversation.creator.name %>
                             </p>
                             <p class="lastSent">
-                              <%= new Date(conversation.last_updated).toLocaleTimeString() %> - <%= new
-                                  Date(conversation.last_updated).toLocaleDateString() %>
+                              <%= moment(conversation.last_updated).fromNow() %>
                             </p>
                           </div>
                         </div>
@@ -182,9 +181,10 @@
                   if (message.attachment && message.attachment.length > 0) {
                     message.attachment.forEach((att) => {
                       attachments += `
-                        <div class="attachment" onclick="showFullImg('./uploads/attachments/${att}')">
-                          <img src="./uploads/attachments/${att}" alt="${att}" />
-                        </div>
+                        <img
+                          onclick="showFullImg('./uploads/attachments/${att}')"
+                          src="./uploads/attachments/${att}" alt="${att}"
+                        />
                       `
                     })
                   }
@@ -200,9 +200,9 @@
                       <div class="messageText">${message.text}</div>
                     </div>
                     ${attachments}
-                    <div class="message-time">${new Date(message.date_time).toLocaleTimeString()}</div>
-                  </div>
-                  `
+                    <div class="message-time">${moment(message.date_time).fromNow()}</div>
+                  </div >
+                `
 
                   allMessages += messageHTML;
 
@@ -229,6 +229,7 @@
               })
             }
           } else {
+            console.log(body.errors)
             Swal.fire({
               position: "center",
               icon: "error",
@@ -238,7 +239,6 @@
             });
           }
         } catch (err) {
-          console.log(err)
           Swal.fire({
             position: "center",
             icon: "error",
@@ -276,7 +276,7 @@
               Swal.fire({
                 position: "center",
                 icon: "error",
-                title: body.errors.common.msg || "Unknown error occurred",
+                title: body.errors.avatar.msg || body.errors.common.msg || "Unknown error occurred",
                 showConfirmButton: false,
                 timer: 1500,
               });

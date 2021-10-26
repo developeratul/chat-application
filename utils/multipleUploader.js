@@ -28,7 +28,7 @@ function uploader(subfolder_path, allowed_file_types, max_file_size, max_number_
         if (allowed_file_types.includes(file.mimetype)) {
           cb(null, true);
         } else {
-          cb(createError(error_msg));
+          cb(new Error(error_msg));
         }
       }
     },

@@ -5,6 +5,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const moment = require("moment");
 
 // middlewares
 const { notFoundHandler, errorHandler } = require("./middlewares/errorHandler");
@@ -17,6 +18,8 @@ const inboxRouter = require("./routes/inboxRouter");
 
 const app = express();
 dotenv.config();
+
+app.locals.moment = moment;
 
 const port = process.env.PORT;
 const mongoConnectionString = process.env.MONGO_URL;
